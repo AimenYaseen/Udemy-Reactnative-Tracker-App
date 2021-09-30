@@ -11,4 +11,4 @@ const AccountScreen = () => {
 
 const styles = StyleSheet.create({});
 
-export default TrackAccountScreen;
+export default AccountScreen;

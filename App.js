@@ -1,24 +1,22 @@
 import React from "react";
-import {
-  createAppContainer,
-  createBottomTabNavigator,
-  createSwitchNavigator,
-} from "react-navigation";
+import { createAppContainer, createSwitchNavigator } from "react-navigation";
+import { createBottomTabNavigator } from "react-navigation-tabs";
+import { createStackNavigator } from "react-navigation-stack";
+import AccountScreen from "./src/screens/AccountScreen";
 import SignInScreen from "./src/screens/SignInScreen";
 import SignUpScreen from "./src/screens/SignUpScreen";
 import TrackCreateScreen from "./src/screens/TrackCreateScreen";
-import TrackListScreen from "./src/screens/TrackListScreen";
 import TrackDetailsScreen from "./src/screens/TrackDetailsScreen";
-import AccountScreen from "./src/screens/AccountScreen";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import TrackListScreen from "./src/screens/TrackListScreen";
+// import { createBottomTabNavigator }
 
 const switchNavigator = createSwitchNavigator({
-  loginFlow: createNativeStackNavigator({
-    SignIn: SignInScreen,
+  loginFlow: createStackNavigator({
     SignUp: SignUpScreen,
+    SignIn: SignInScreen,
   }),
   mainFlow: createBottomTabNavigator({
-    trackListFlow: createNativeStackNavigator({
+    trackFlow: createStackNavigator({
       TrackList: TrackListScreen,
       TrackDetail: TrackDetailsScreen,
     }),
