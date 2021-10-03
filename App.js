@@ -10,8 +10,10 @@ import TrackDetailsScreen from "./src/screens/TrackDetailsScreen";
 import TrackListScreen from "./src/screens/TrackListScreen";
 import { Provider as AuthProvider } from "./src/context/AuthContext";
 import { setNavigator } from "./src/navigationRef";
+import SplashScreen from "./src/screens/SplashScreen";
 
 const switchNavigator = createSwitchNavigator({
+  Splash: SplashScreen,
   loginFlow: createStackNavigator({
     SignUp: SignUpScreen,
     SignIn: SignInScreen,
