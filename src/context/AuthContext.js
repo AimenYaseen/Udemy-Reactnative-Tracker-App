@@ -7,20 +7,44 @@ const authReducer = (state, action) => {
   switch (action.type) {
     case "show_error":
       return { ...state, errorMessage: action.payload };
-    case "signup":
+    case "signin":
       return { token: action.payload, errorMessage: "" };
+    case "remove_error":
+      return { ...state, errorMessage: "" };
     default:
       return state;
   }
 };
 
-const signin = (dispatch) => {
-  return async ({ email, password }) => {
+const automaticSignIn = (dispatch) => async () => {
+  const token = await AsyncStorage.getItem("token");
+  if (token) {
+    dispatch({ type: "signin", payload: token });
+    navigate("TrackList");
+  } else {
+    navigate("loginFlow");
+  }
+};
+
+const remove_error = (dispatch) => () => {
+  dispatch({ type: "remove_error" });
+};
+
+const signin =
+  (dispatch) =>
+  async ({ email, password }) => {
     try {
       const response = await trackerApi.post("/signin", { email, password });
-    } catch (err) {}
+      await AsyncStorage.setItem("token", response.data.token);
+      dispatch({ type: "signin", payload: response.data.token });
+      navigate("TrackList");
+    } catch (err) {
+      dispatch({
+        type: "show_error",
+        payload: "Something went wrong with sign in",
+      });
+    }
   };
-};
 
 const signup =
   (dispatch) =>
@@ -28,7 +52,7 @@ const signup =
     try {
       const response = await trackerApi.post("/signup", { email, password });
       await AsyncStorage.setItem("token", response.data.token);
-      dispatch({ type: "signup", payload: response.data.token });
+      dispatch({ type: "signin", payload: response.data.token });
 
       navigate("TrackList");
     } catch (err) {
@@ -39,12 +63,10 @@ const signup =
     }
   };
 
-const signout = (dispatch) => {
-  return () => {};
-};
+const signout = (dispatch) => () => {};
 
 export const { Context, Provider } = createDataContext(
   authReducer,
-  { signup, signin, signout },
+  { signup, signin, signout, remove_error, automaticSignIn },
   { token: "", errorMessage: "" }
 );
