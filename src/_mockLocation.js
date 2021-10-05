@@ -1,7 +1,7 @@
 import * as Location from "expo-location";
 
 const tenMetersWithDegrees = 0.0001; // 0.0001 means ten meters
-
+// 30.66133202385322, 73.07555199869797;
 const getLocation = (increment) => {
   return {
     timestamp: 10000000,
@@ -11,8 +11,8 @@ const getLocation = (increment) => {
       accuracy: 5,
       altitudeAccuracy: 5,
       altitude: 5,
-      latitude: 37.33233141 + increment * tenMetersWithDegrees,
-      longitude: -122.0312186 + increment * tenMetersWithDegrees,
+      latitude: 30.66133202385322 + increment * tenMetersWithDegrees,
+      longitude: 73.07555199869797 + increment * tenMetersWithDegrees,
     },
   };
 };
