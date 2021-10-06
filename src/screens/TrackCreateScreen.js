@@ -10,19 +10,24 @@ import { Context as LocationContext } from "../context/LocationContext";
 import useLocation from "../hooks/useLocation";
 
 const TrackCreateScreen = ({ isFocused }) => {
-  const { state, addLocation } = useContext(LocationContext);
-  const callback = useContext(
+  const {
+    state: { recording },
+    addLocation,
+  } = useContext(LocationContext);
+
+  const callback = useCallback(
     (location) => {
       //console.log("INSIDE", state.recording);
-      addLocation(location, state.recording);
+      addLocation(location, recording);
     },
-    [state.recording]
+    [recording]
   );
   // console.log("OUTSIDE", state.recording);
-  const [errorR] = useLocation(isFocused, callback);
+
+  const [errorR] = useLocation(isFocused || recording, callback);
 
   return (
-    <SafeAreaView forceInset={{ top: "always" }}>
+    <SafeAreaView>
       <Text h2 style={styles.text}>
         Track Create Screen
       </Text>
@@ -33,10 +38,17 @@ const TrackCreateScreen = ({ isFocused }) => {
   );
 };
 
+TrackCreateScreen.navigationOptions = () => {
+  return {
+    headerShown: false,
+  };
+};
+
 const styles = StyleSheet.create({
   text: {
     alignSelf: "center",
-    marginTop: 40,
+    marginTop: 30,
+    marginBottom: 10,
   },
 });
 
