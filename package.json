@@ -17,7 +17,9 @@
     "@react-navigation/stack": "^6.0.9",
     "axios": "^0.21.4",
     "expo": "~42.0.1",
+    "expo-location": "~12.1.2",
     "expo-status-bar": "~1.0.4",
+    "jsc-android": "^250230.2.1",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
@@ -32,8 +34,7 @@
     "react-navigation": "^4.4.4",
     "react-navigation-stack": "^2.10.4",
     "react-navigation-tabs": "^2.11.1",
-    "react-stack-navigation": "^1.0.1",
-    "expo-location": "~12.1.2"
+    "react-stack-navigation": "^1.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0"
