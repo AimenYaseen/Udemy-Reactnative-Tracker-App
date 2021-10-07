@@ -30,7 +30,7 @@ const Map = () => {
       />
       <Polyline
         coordinates={locations.map((loc) => loc.coords)}
-        lineDashPattern={[0]}
+        lineDashPattern={[1]}
       />
     </MapView>
   );
