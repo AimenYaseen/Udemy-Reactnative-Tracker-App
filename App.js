@@ -17,7 +17,7 @@ import { FontAwesome } from "@expo/vector-icons";
 
 const trackFlow = createStackNavigator({
   TrackList: TrackListScreen,
-  TrackDetail: TrackDetailsScreen,
+  TrackDetails: TrackDetailsScreen,
 });
 
 trackFlow.navigationOptions = () => {

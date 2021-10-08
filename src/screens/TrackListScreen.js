@@ -4,7 +4,6 @@ import {
   Text,
   TouchableOpacity,
   FlatList,
-  VirtualizedList,
   ScrollView,
 } from "react-native";
 import { ListItem } from "react-native-elements";
@@ -20,21 +19,35 @@ const TrackListScreen = ({ navigation }) => {
       <FlatList
         data={state}
         initialNumToRender={state.length}
-        keyExtractor={(item) => item._id.toString()}
+        keyExtractor={(item) => {
+          return item._id;
+        }}
         renderItem={({ item }) => {
           return (
             <ScrollView>
               <TouchableOpacity
                 onPress={() =>
-                  navigation.navigate("TrackDetails", { _id: item._id })
+                  navigation.navigate("TrackDetails", {
+                    _id: item._id,
+                  })
                 }
               >
-                <ListItem title={item.name} />
+                {item ? (
+                  <ListItem bottomDivider>
+                    <ListItem.Content>
+                      <ListItem.Title>{item.name}</ListItem.Title>
+                      <ListItem.Subtitle>Tracks</ListItem.Subtitle>
+                    </ListItem.Content>
+                    <ListItem.Chevron />
+                  </ListItem>
+                ) : (
+                  <Text>No Data Found</Text>
+                )}
               </TouchableOpacity>
             </ScrollView>
           );
         }}
-        // ListEmptyComponent={<Text message="No data found." />}
+        //  ListEmptyComponent={<Text> No data found </Text>}
       />
     </>
   );

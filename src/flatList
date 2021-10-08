@@ -1,0 +1,27 @@
+      <FlatList
+        data={state}
+        initialNumToRender={state.length}
+        keyExtractor={(item) => {
+          return item._id;
+        }}
+        renderItem={({ item }) => {
+          return (
+            <ScrollView>
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate("TrackDetail", {
+                    _id: item._id,
+                  })
+                }
+              >
+                {item ? (
+                  <ListItem chevron title={item.name} />
+                ) : (
+                  <Text>No Data Found</Text>
+                )}
+              </TouchableOpacity>
+            </ScrollView>
+          );
+        }}
+        //  ListEmptyComponent={<Text> No data found </Text>}
+      />
